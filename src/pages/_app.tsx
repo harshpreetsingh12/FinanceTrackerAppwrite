@@ -28,6 +28,7 @@ function ProtectedRoute({ Component, pageProps }: any) {
 
   const getUser=async ()=>{
     const currentUser =await authService.getUser()
+    console.log(currentUser)
     dispatch(storeUser(currentUser));
     router.push('/dashboards')
   }

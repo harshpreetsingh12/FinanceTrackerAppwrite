@@ -1,5 +1,4 @@
 export function isLoggedIn() {
-  console.log('loginrun')
     if (typeof window !== 'undefined') {
       const session=JSON.parse(localStorage.getItem('cookieFallback'))
 

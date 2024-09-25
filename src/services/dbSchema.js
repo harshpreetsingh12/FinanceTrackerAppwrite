@@ -23,3 +23,10 @@ const userExpensesInfo={
         }
     ]
 }
+
+const userTable={
+    user_id:'',
+    username:'',
+    email:'',
+    userStats:false
+}
