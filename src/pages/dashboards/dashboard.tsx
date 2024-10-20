@@ -1,31 +1,20 @@
 import { useRouter } from 'next/router';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../reduxStore/store';
 import authService from '../../services/AuthHooks';
-import { removeUser, storeUser } from '../../reduxStore/authSlice';
-import { isLoggedIn } from '../../helpers/helper';
+import { removeUser} from '../../reduxStore/authSlice';
 import { addExpense } from '../api/routesService';
-import clientPromise from '../lib/mongo';
-import { CONF } from '../../conf/conf';
-import { GetServerSideProps } from 'next';
-
-interface Expense {
-  _id: string; // MongoDB ID
-  amount: number;
-  recurrence: string;
-  payFor: string;
-}
 
 interface DashboardProps {
-  expenses: Expense[]; // Receive expenses as prop
+  
 }
 interface AuthState {
     user: any;
     isAuthenticated: boolean;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ expenses }) => {
+const Dashboard: React.FC<DashboardProps> = () => {
   const router = useRouter();
   const dispatch=useDispatch()
   const {isAuthenticated, user}:AuthState = useSelector((state: RootState) => state.auth);
@@ -45,17 +34,6 @@ const Dashboard: React.FC<DashboardProps> = ({ expenses }) => {
     <button onClick={addExpense}>Add Value</button><br/>
     <button onClick={logOutcall}>Logout</button>
     </div>
-    <div>
-      <h1>User Expenses</h1>
-      <ul>
-        {expenses.map(expense => (
-          <li key={expense._id}>
-            User: {expense.userId}
-          </li>
-        ))}
-      </ul>
-    </div>
-
     </Fragment>
   );
 };
